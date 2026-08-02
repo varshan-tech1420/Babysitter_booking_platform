@@ -1,10 +1,44 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 
 def home(request):
     return render(request, 'home.html')
 
 def register(request):
-    return render(request, 'register.html')
+    if request.method == "POST":
+        username = request.POST["username"]
+        email = request.POST["email"]
+        password = request.POST["password"]
+
+        User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
+
+        return redirect("/login/")
+
+    return render(request, "register.html")
 
 def login_view(request):
-    return render(request, 'login.html')
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None:
+            login(request, user)
+            return redirect("/")
+
+        return render(request, "login.html", {
+            "error": "Invalid username or password"
+        })
+
+    return render(request, "login.html")
