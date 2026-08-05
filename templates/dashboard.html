@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Dashboard</h2>
+
+    <div class="alert alert-success mt-3">
+        Welcome {{ user.username }}!
+    </div>
+
+    <p>You are successfully logged in.</p>
+</div>
+
+{% endblock %}
