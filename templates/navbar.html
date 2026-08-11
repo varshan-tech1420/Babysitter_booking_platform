@@ -1,0 +1,26 @@
+<nav style="
+    background: white;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+">
+
+    <a href="/" style="font-size: 22px; font-weight: bold;">
+        Babysitter Booking
+    </a>
+
+    <div>
+        <a href="/" style="margin-right: 20px;">Home</a>
+
+        {% if user.is_authenticated %}
+            <a href="/dashboard/" style="margin-right: 20px;">Dashboard</a>
+            <a href="/logout/">Logout</a>
+        {% else %}
+            <a href="/login/" style="margin-right: 20px;">Login</a>
+            <a href="/register/">Register</a>
+        {% endif %}
+    </div>
+
+</nav>

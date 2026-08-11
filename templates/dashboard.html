@@ -1,15 +1,13 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
 
-<div class="container mt-5">
-    <h2>Dashboard</h2>
+<h1>Dashboard</h1>
 
-    <div class="alert alert-success mt-3">
-        Welcome {{ user.username }}!
-    </div>
+<p>Welcome, {{ user.username }}!</p>
 
-    <p>You are successfully logged in.</p>
-</div>
+<p>
+    This is your babysitter booking dashboard.
+</p>
 
 {% endblock %}

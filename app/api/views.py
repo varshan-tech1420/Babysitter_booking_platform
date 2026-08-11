@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+
 def home(request):
     return render(request, "home.html")
 
@@ -12,6 +13,11 @@ def register(request):
         username = request.POST["username"]
         email = request.POST["email"]
         password = request.POST["password"]
+
+        if User.objects.filter(username=username).exists():
+            return render(request, "register.html", {
+                "error": "Username already exists"
+            })
 
         User.objects.create_user(
             username=username,
@@ -48,7 +54,9 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("/dashboard/")
+    return redirect("/")
+
+
 @login_required
 def dashboard(request):
     return render(request, "dashboard.html")
