@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Parents</h1>
+
+{% if parents %}
+    <ul>
+        {% for parent in parents %}
+            <li>
+                <strong>{{ parent.name }}</strong><br>
+                Email: {{ parent.email }}<br>
+                Phone: {{ parent.phone }}<br>
+                Address: {{ parent.address }}
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No parents found.</p>
+{% endif %}
+
+{% endblock %}

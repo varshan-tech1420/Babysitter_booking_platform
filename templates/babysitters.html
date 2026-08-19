@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Babysitters</h1>
+
+{% if babysitters %}
+    {% for babysitter in babysitters %}
+        <div>
+            <h3>{{ babysitter.name }}</h3>
+            <p>Email: {{ babysitter.email }}</p>
+            <p>Phone: {{ babysitter.phone }}</p>
+            <p>Experience: {{ babysitter.experience }} years</p>
+            <p>Hourly Rate: ₹{{ babysitter.hourly_rate }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No babysitters found.</p>
+{% endif %}
+
+{% endblock %}

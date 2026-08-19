@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="booking-container">
+
+    <h1>Book a Babysitter</h1>
+    <p>Select a parent, babysitter and booking time.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="parent_id">Parent</label>
+
+            <select name="parent_id" id="parent_id" required>
+                <option value="">Select Parent</option>
+
+                {% for parent in parents %}
+                    <option value="{{ parent.id }}">
+                        {{ parent.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="babysitter_id">Babysitter</label>
+
+            <select name="babysitter_id" id="babysitter_id" required>
+                <option value="">Select Babysitter</option>
+
+                {% for babysitter in babysitters %}
+                    <option value="{{ babysitter.id }}">
+                        {{ babysitter.name }} -
+                        ₹{{ babysitter.hourly_rate }}/hour
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="booking_date">Booking Date</label>
+
+            <input
+                type="date"
+                name="booking_date"
+                id="booking_date"
+                required
+            >
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+                <label for="start_time">Start Time</label>
+
+                <input
+                    type="time"
+                    name="start_time"
+                    id="start_time"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="end_time">End Time</label>
+
+                <input
+                    type="time"
+                    name="end_time"
+                    id="end_time"
+                    required
+                >
+            </div>
+
+        </div>
+
+
+        <button type="submit">
+            Confirm Booking
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
