@@ -1,39 +1,202 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Babysitter Booking Platform</title>
 
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #f5f7fb;
+            color: #222;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1100px;
+        /* NAVBAR */
+
+        .navbar {
+            background: #1f2937;
+            padding: 15px 30px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
             margin: auto;
-            padding: 30px 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        a {
+        .logo {
+            color: white;
             text-decoration: none;
+            font-size: 22px;
+            font-weight: bold;
         }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: #93c5fd;
+        }
+
+        .logout-link {
+            color: #fca5a5 !important;
+        }
+
+        /* MAIN */
+
+        main {
+            min-height: calc(100vh - 140px);
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #1f2937;
+            color: #d1d5db;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    {% include "navbar.html" %}
+    <!-- NAVBAR -->
 
-    <div class="container">
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="/" class="logo">
+                👶 Babysitter Booking
+            </a>
+
+
+            <div class="nav-links">
+
+                <a href="/">
+                    Home
+                </a>
+
+
+                {% if user.is_authenticated %}
+
+                    <a href="/dashboard/">
+                        Dashboard
+                    </a>
+
+                    <a href="/parents/">
+                        Parents
+                    </a>
+
+                    <a href="/babysitters/">
+                        Babysitters
+                    </a>
+
+                    <a href="/booking/">
+                        Booking
+                    </a>
+
+                    <a href="/payment/">
+                        Payment
+                    </a>
+
+                    <a href="/logout/" class="logout-link">
+                        Logout
+                    </a>
+
+                {% else %}
+
+                    <a href="/login/">
+                        Login
+                    </a>
+
+                    <a href="/register/">
+                        Register
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- PAGE CONTENT -->
+
+    <main>
+
         {% block content %}
+
         {% endblock %}
-    </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Babysitter Booking Platform
+        </p>
+
+    </footer>
+
 
 </body>
+
 </html>

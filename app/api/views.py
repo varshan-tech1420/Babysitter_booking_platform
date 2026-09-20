@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 
 from app.services.parent_service import get_all_parents
 from app.services.babysitter_service import get_all_babysitters
-from app.services.booking_service import create_booking
+from app.services.booking_service import create_booking, get_all_bookings
+from app.services.payment_service import create_payment
 
 
 def home(request):
@@ -99,15 +100,18 @@ def booking_create(request):
         end_time = request.POST["end_time"]
 
         booking_date = datetime.strptime(
-            booking_date, "%Y-%m-%d"
+            booking_date,
+            "%Y-%m-%d"
         ).date()
 
         start_time = datetime.strptime(
-            start_time, "%H:%M"
+            start_time,
+            "%H:%M"
         ).time()
 
         end_time = datetime.strptime(
-            end_time, "%H:%M"
+            end_time,
+            "%H:%M"
         ).time()
 
         create_booking(
@@ -123,4 +127,24 @@ def booking_create(request):
     return render(request, "booking.html", {
         "parents": parents,
         "babysitters": babysitters
+    })
+
+
+@login_required
+def payment_create(request):
+    bookings = get_all_bookings()
+
+    if request.method == "POST":
+        booking_id = request.POST["booking_id"]
+        amount = request.POST["amount"]
+
+        create_payment(
+            booking_id=booking_id,
+            amount=amount
+        )
+
+        return redirect("/dashboard/")
+
+    return render(request, "payment.html", {
+        "bookings": bookings
     })

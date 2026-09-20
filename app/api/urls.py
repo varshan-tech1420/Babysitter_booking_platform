@@ -9,6 +9,7 @@ from app.api.views import (
     parent_list,
     babysitter_list,
     booking_create,
+    payment_create,
 )
 
 
@@ -28,4 +29,6 @@ urlpatterns = [
     path("babysitters/", babysitter_list, name="babysitter_list"),
 
     path("booking/", booking_create, name="booking_create"),
+
+    path("payment/", payment_create, name="payment_create"),
 ]

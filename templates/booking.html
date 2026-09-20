@@ -2,91 +2,262 @@
 
 {% block content %}
 
-<div class="booking-container">
+<div class="booking-page">
 
-    <h1>Book a Babysitter</h1>
-    <p>Select a parent, babysitter and booking time.</p>
+    <div class="booking-card">
 
-    <form method="POST">
-        {% csrf_token %}
+        <h1>📅 Book a Babysitter</h1>
 
-        <div class="form-group">
-            <label for="parent_id">Parent</label>
+        <p class="subtitle">
+            Select a parent, babysitter and booking time.
+        </p>
 
-            <select name="parent_id" id="parent_id" required>
-                <option value="">Select Parent</option>
+        <form method="POST">
 
-                {% for parent in parents %}
-                    <option value="{{ parent.id }}">
-                        {{ parent.name }}
-                    </option>
-                {% endfor %}
-            </select>
-        </div>
+            {% csrf_token %}
 
-
-        <div class="form-group">
-            <label for="babysitter_id">Babysitter</label>
-
-            <select name="babysitter_id" id="babysitter_id" required>
-                <option value="">Select Babysitter</option>
-
-                {% for babysitter in babysitters %}
-                    <option value="{{ babysitter.id }}">
-                        {{ babysitter.name }} -
-                        ₹{{ babysitter.hourly_rate }}/hour
-                    </option>
-                {% endfor %}
-            </select>
-        </div>
-
-
-        <div class="form-group">
-            <label for="booking_date">Booking Date</label>
-
-            <input
-                type="date"
-                name="booking_date"
-                id="booking_date"
-                required
-            >
-        </div>
-
-
-        <div class="form-row">
+            <!-- Parent -->
 
             <div class="form-group">
-                <label for="start_time">Start Time</label>
 
-                <input
-                    type="time"
-                    name="start_time"
-                    id="start_time"
+                <label for="parent_id">
+                    👨‍👩‍👧 Parent
+                </label>
+
+                <select
+                    name="parent_id"
+                    id="parent_id"
                     required
                 >
+
+                    <option value="">
+                        Select Parent
+                    </option>
+
+                    {% for parent in parents %}
+
+                        <option value="{{ parent.id }}">
+                            {{ parent.name }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
             </div>
 
 
-            <div class="form-group">
-                <label for="end_time">End Time</label>
+            <!-- Babysitter -->
 
-                <input
-                    type="time"
-                    name="end_time"
-                    id="end_time"
+            <div class="form-group">
+
+                <label for="babysitter_id">
+                    👶 Babysitter
+                </label>
+
+                <select
+                    name="babysitter_id"
+                    id="babysitter_id"
                     required
                 >
+
+                    <option value="">
+                        Select Babysitter
+                    </option>
+
+                    {% for babysitter in babysitters %}
+
+                        <option value="{{ babysitter.id }}">
+                            {{ babysitter.name }} -
+                            ₹{{ babysitter.hourly_rate }}/hour
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
             </div>
 
-        </div>
+
+            <!-- Date -->
+
+            <div class="form-group">
+
+                <label for="booking_date">
+                    📅 Booking Date
+                </label>
+
+                <input
+                    type="date"
+                    name="booking_date"
+                    id="booking_date"
+                    required
+                >
+
+            </div>
 
 
-        <button type="submit">
-            Confirm Booking
-        </button>
+            <!-- Time -->
 
-    </form>
+            <div class="time-row">
+
+                <div class="form-group">
+
+                    <label for="start_time">
+                        🕐 Start Time
+                    </label>
+
+                    <input
+                        type="time"
+                        name="start_time"
+                        id="start_time"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="end_time">
+                        🕐 End Time
+                    </label>
+
+                    <input
+                        type="time"
+                        name="end_time"
+                        id="end_time"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button type="submit">
+                Confirm Booking
+            </button>
+
+        </form>
+
+    </div>
 
 </div>
+
+
+<style>
+
+.booking-page {
+    min-height: 70vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px 20px;
+}
+
+.booking-card {
+    width: 100%;
+    max-width: 600px;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.booking-card h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+
+    border-color: #2563eb;
+}
+
+.time-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+.booking-card button {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.booking-card button:hover {
+    background: #1d4ed8;
+}
+
+@media (max-width: 600px) {
+
+    .time-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+}
+
+</style>
 
 {% endblock %}

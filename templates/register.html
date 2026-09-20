@@ -2,42 +2,221 @@
 
 {% block content %}
 
-<h2>Create Account</h2>
+<div class="register-page">
 
-{% if error %}
-    <p>{{ error }}</p>
-{% endif %}
+    <div class="register-card">
 
-<form method="POST">
+        <h1>Create Account 👤</h1>
 
-    {% csrf_token %}
+        <p class="subtitle">
+            Register to use the babysitter booking platform.
+        </p>
 
-    <input
-        type="text"
-        name="username"
-        placeholder="Username"
-        required
-    >
-    <br><br>
+        {% if error %}
+            <div class="error-message">
+                {{ error }}
+            </div>
+        {% endif %}
 
-    <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        required
-    >
-    <br><br>
+        <form method="POST">
 
-    <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        required
-    >
-    <br><br>
+            {% csrf_token %}
 
-    <button type="submit">Register</button>
+            <div class="form-group">
 
-</form>
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Choose a username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <p class="login-text">
+
+            Already have an account?
+
+            <a href="/login/">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<style>
+
+.register-page {
+    min-height: 70vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px 20px;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 420px;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.register-card h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+}
+
+.form-group input:focus {
+    outline: none;
+
+    border-color: #2563eb;
+}
+
+.register-card button {
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.register-card button:hover {
+    background: #1d4ed8;
+}
+
+.error-message {
+    background: #fee2e2;
+
+    color: #b91c1c;
+
+    padding: 10px;
+
+    border-radius: 7px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+
+.login-text {
+    text-align: center;
+
+    margin-top: 22px;
+
+    color: #666;
+}
+
+.login-text a {
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+</style>
 
 {% endblock %}

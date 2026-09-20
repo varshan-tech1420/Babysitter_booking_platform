@@ -18,7 +18,8 @@ def create_booking(
         babysitter=babysitter,
         booking_date=booking_date,
         start_time=start_time,
-        end_time=end_time
+        end_time=end_time,
+        status="pending"
     )
 
 

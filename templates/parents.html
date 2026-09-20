@@ -2,22 +2,133 @@
 
 {% block content %}
 
-<h1>Parents</h1>
+<div class="parents-container">
 
-{% if parents %}
-    <ul>
-        {% for parent in parents %}
-            <li>
-                <strong>{{ parent.name }}</strong><br>
-                Email: {{ parent.email }}<br>
-                Phone: {{ parent.phone }}<br>
-                Address: {{ parent.address }}
-            </li>
-            <hr>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No parents found.</p>
-{% endif %}
+    <div class="page-header">
+        <h1>👨‍👩‍👧 Parents</h1>
+        <p>Registered parents in the platform.</p>
+    </div>
+
+    {% if parents %}
+
+        <div class="parents-grid">
+
+            {% for parent in parents %}
+
+                <div class="parent-card">
+
+                    <h2>{{ parent.name }}</h2>
+
+                    <div class="parent-info">
+
+                        <p>
+                            <strong>📧 Email:</strong>
+                            {{ parent.email }}
+                        </p>
+
+                        <p>
+                            <strong>📞 Phone:</strong>
+                            {{ parent.phone }}
+                        </p>
+
+                        <p>
+                            <strong>📍 Address:</strong>
+                            {{ parent.address }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+            <h2>No Parents Found</h2>
+            <p>No parent records are available yet.</p>
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<style>
+
+.parents-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: #666;
+}
+
+.parents-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.parent-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.parent-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #1f2937;
+}
+
+.parent-info p {
+    margin: 12px 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+.parent-info strong {
+    color: #222;
+}
+
+.empty-state {
+    background: white;
+    padding: 40px;
+    text-align: center;
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.empty-state p {
+    color: #666;
+}
+
+@media (max-width: 700px) {
+
+    .parents-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
 
 {% endblock %}

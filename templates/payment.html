@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="payment-page">
+
+    <div class="payment-card">
+
+        <h1>💳 Payment</h1>
+
+        <p class="subtitle">
+            Complete payment for your booking.
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+
+                <label for="booking_id">
+                    📅 Booking
+                </label>
+
+                <select
+                    name="booking_id"
+                    id="booking_id"
+                    required
+                >
+
+                    <option value="">
+                        Select Booking
+                    </option>
+
+                    {% for booking in bookings %}
+
+                        <option value="{{ booking.id }}">
+                            Booking #{{ booking.id }}
+                            -
+                            {{ booking.parent.name }}
+                            -
+                            {{ booking.babysitter.name }}
+                            -
+                            {{ booking.booking_date }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="amount">
+                    💰 Amount
+                </label>
+
+                <input
+                    type="number"
+                    name="amount"
+                    id="amount"
+                    step="0.01"
+                    min="0"
+                    placeholder="Enter payment amount"
+                    required
+                >
+
+            </div>
+
+            <button type="submit">
+                Create Payment
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<style>
+
+.payment-page {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.payment-card {
+    width: 100%;
+    max-width: 550px;
+    background: white;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.payment-card h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font-size: 15px;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.payment-card button {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 7px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.payment-card button:hover {
+    background: #1d4ed8;
+}
+
+</style>
+
+{% endblock %}
