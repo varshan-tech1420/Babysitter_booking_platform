@@ -7,8 +7,17 @@ from django.contrib.auth.decorators import login_required
 
 from app.services.parent_service import get_all_parents
 from app.services.babysitter_service import get_all_babysitters
-from app.services.booking_service import create_booking, get_all_bookings
-from app.services.payment_service import create_payment
+
+from app.services.booking_service import (
+    create_booking,
+    get_all_bookings,
+    update_booking_status
+)
+
+from app.services.payment_service import (
+    create_payment,
+    get_all_payments
+)
 
 
 def home(request):
@@ -17,6 +26,7 @@ def home(request):
 
 def register(request):
     if request.method == "POST":
+
         username = request.POST["username"]
         email = request.POST["email"]
         password = request.POST["password"]
@@ -39,6 +49,7 @@ def register(request):
 
 def login_view(request):
     if request.method == "POST":
+
         username = request.POST["username"]
         password = request.POST["password"]
 
@@ -66,11 +77,19 @@ def logout_view(request):
 
 @login_required
 def dashboard(request):
-    return render(request, "dashboard.html")
+
+    bookings = get_all_bookings()
+    payments = get_all_payments()
+
+    return render(request, "dashboard.html", {
+        "bookings": bookings,
+        "payments": payments
+    })
 
 
 @login_required
 def parent_list(request):
+
     parents = get_all_parents()
 
     return render(request, "parents.html", {
@@ -80,6 +99,7 @@ def parent_list(request):
 
 @login_required
 def babysitter_list(request):
+
     babysitters = get_all_babysitters()
 
     return render(request, "babysitters.html", {
@@ -89,10 +109,12 @@ def babysitter_list(request):
 
 @login_required
 def booking_create(request):
+
     parents = get_all_parents()
     babysitters = get_all_babysitters()
 
     if request.method == "POST":
+
         parent_id = request.POST["parent_id"]
         babysitter_id = request.POST["babysitter_id"]
         booking_date = request.POST["booking_date"]
@@ -131,10 +153,27 @@ def booking_create(request):
 
 
 @login_required
+def update_booking_status_view(request, booking_id):
+
+    if request.method == "POST":
+
+        status = request.POST["status"]
+
+        update_booking_status(
+            booking_id,
+            status
+        )
+
+    return redirect("/dashboard/")
+
+
+@login_required
 def payment_create(request):
+
     bookings = get_all_bookings()
 
     if request.method == "POST":
+
         booking_id = request.POST["booking_id"]
         amount = request.POST["amount"]
 
