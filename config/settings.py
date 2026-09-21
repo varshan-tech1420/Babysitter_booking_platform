@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-u4(n0cisg^-vo!9153utv_=ubh4ib8!t=7lij7c&*uy#&s*oug
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["babysitter-booking-platform.onrender.com"]
 
 
 # Application definition
