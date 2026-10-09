@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-u4(n0cisg^-vo!9153utv_=ubh4ib8!t=7lij7c&*uy#&s*oug
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["babysitter-booking-platform.onrender.com"]
+ALLOWED_HOSTS = ["babysitter-booking-platform.onrender.com",
+    "127.0.0.1",
+    "localhost",
+]
 
 
 # Application definition
@@ -79,7 +82,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "babysitter_booking_db",
         "USER": "root",
-        "PASSWORD": "varShan@2014712",
+        "PASSWORD": "varshan2014",
         "HOST": "127.0.0.1",
         "PORT": "3306",
     }
