@@ -77,16 +77,35 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # MySQL Database
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "babysitter_booking_db",
-        "USER": "root",
-        "PASSWORD": "varshan2014",
-        "HOST": "127.0.0.1",
-        "PORT": "3306",
+import os
+
+import dj_database_url
+
+
+
+# Database
+# MySQL Database
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.parse(
+            os.environ["DATABASE_URL"],
+            conn_max_age=600,
+            ssl_require=True,
+        )
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": "babysitter_booking_db",
+            "USER": "root",
+            "PASSWORD": "varshan2014",
+            "HOST": "127.0.0.1",
+            "PORT": "3306",
+        }
+    }
+
+
 
 
 # Password validation
